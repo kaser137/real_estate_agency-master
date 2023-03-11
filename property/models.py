@@ -47,5 +47,9 @@ class Flat(models.Model):
         blank=True,
         db_index=True)
 
+    class Meta:
+        verbose_name = 'Квартира'
+        verbose_name_plural = 'Квартиры'
+
     def __str__(self):
         return f'{self.town}, {self.address} ({self.price}р.)'
