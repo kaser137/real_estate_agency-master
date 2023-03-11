@@ -46,6 +46,7 @@ class Flat(models.Model):
         null=True,
         blank=True,
         db_index=True)
+    new_building = models.BooleanField('Новостройка', null=True, blank=True, db_index=True)
 
     class Meta:
         verbose_name = 'Квартира'
