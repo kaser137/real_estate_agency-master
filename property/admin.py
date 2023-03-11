@@ -8,6 +8,7 @@ class FlatAdmin(admin.ModelAdmin):
     list_editable = ('new_building',)
     # list_display_links = ('owner',)
     readonly_fields = ('created_at',)
+    list_filter = ('new_building', 'rooms_number', 'floor', 'has_balcony')
 
 
 admin.site.register(Flat, FlatAdmin)
