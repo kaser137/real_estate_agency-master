@@ -21,9 +21,9 @@ def show_flats(request):
     if town:
         flats = flats.filter(town=town)
     if min_price:
-        flats = flats.filter(price__gt=min_price)
+        flats = flats.filter(price__gte=min_price)
     if max_price:
-        flats = flats.filter(price__lt=max_price)
+        flats = flats.filter(price__lte=max_price)
     if new_building:
         flats = flats.filter(new_building=True)
 
