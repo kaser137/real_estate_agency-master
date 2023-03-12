@@ -4,9 +4,11 @@ from django.db import migrations
 
 
 def reformat_phonenumber(phone_number):
-    phone = phonenumbers.parse(phone_number, 'RU')
-    if phonenumbers.is_valid_number(phone):
-        return phone
+    try:
+        phone = phonenumbers.parse(phone_number, 'RU')
+        return ''.join(('+', str(phone.country_code), str(phone.national_number)))
+    except phonenumbers.phonenumberutil.NumberParseException:
+        return None
 
 
 def upgrade_phonenumbers(apps, schema_editor):
