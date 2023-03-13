@@ -46,6 +46,11 @@ class Flat(models.Model):
         null=True,
         blank=True,
         db_index=True)
+    new_building = models.BooleanField('Новостройка', null=True, blank=True, db_index=True)
+
+    class Meta:
+        verbose_name = 'Квартира'
+        verbose_name_plural = 'Квартиры'
 
     def __str__(self):
         return f'{self.town}, {self.address} ({self.price}р.)'
