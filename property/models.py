@@ -70,6 +70,9 @@ class Complaint(models.Model):
         verbose_name = 'Жалоба'
         verbose_name_plural = 'Жалобы'
 
+    def __str__(self):
+        return f'Client: {self.user}, flat: {self.flat}, №{self.id}'
+
 
 class Owner(models.Model):
     name = models.CharField('ФИО владельца', max_length=200, db_index=True)
