@@ -23,5 +23,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(upgrade_phonenumbers)
+        migrations.RunPython(upgrade_phonenumbers),
     ]
