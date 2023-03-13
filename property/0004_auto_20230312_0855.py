@@ -11,7 +11,7 @@ def reformat_phonenumber(phone_number):
 def upgrade_phonenumbers(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
     old_format_numbers = Flat.objects.exclude(owners_phonenumber__isnull=True)
-    for phone in old_format_numbers:
+    for phone in old_format_numbers.iterators:
         phone.owner_pure_phone = reformat_phonenumber(phone.owners_phonenumber)
     Flat.objects.bulk_update(old_format_numbers, ['owner_pure_phone'])
 

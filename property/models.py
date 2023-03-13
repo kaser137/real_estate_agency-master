@@ -1,10 +1,10 @@
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth.models import User
-from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Flat(models.Model):
+    owner = models.CharField('ФИО владельца', max_length=200)
+    owners_phonenumber = models.CharField('Номер владельца', max_length=20)
     created_at = models.DateTimeField(
         'Когда создано объявление',
         default=timezone.now,
@@ -46,38 +46,6 @@ class Flat(models.Model):
         null=True,
         blank=True,
         db_index=True)
-    new_building = models.BooleanField('Новостройка', null=True, blank=True, db_index=True)
-    likes = models.ManyToManyField(User, verbose_name='Кто лайкнул', blank=True)
-
-    class Meta:
-        verbose_name = 'Квартира'
-        verbose_name_plural = 'Квартиры'
 
     def __str__(self):
         return f'{self.town}, {self.address} ({self.price}р.)'
-
-
-class Complaint(models.Model):
-    user = models.ForeignKey(User, verbose_name="Кто жаловался", related_name='complaints', on_delete=models.PROTECT)
-    flat = models.ForeignKey(Flat, verbose_name="Квартира на которую жаловались", related_name='complaints',
-                             on_delete=models.PROTECT)
-    text = models.TextField("Текст жалобы", null=True, blank=True)
-
-    class Meta:
-        verbose_name = 'Жалоба'
-        verbose_name_plural = 'Жалобы'
-
-
-class Owner(models.Model):
-    owner = models.CharField('ФИО владельца', max_length=200, db_index=True)
-    owners_phonenumber = models.CharField('Номер владельца', max_length=20, null=True, db_index=True)
-    owner_pure_phone = PhoneNumberField(verbose_name='Нормализованный номер владельца', null=True, blank=True,
-                                        db_index=True)
-    flat = models.ManyToManyField(Flat, verbose_name="Квартиры в собственности", related_name='owners', db_index=True)
-
-
-    class Meta:
-        verbose_name = 'Собственник'
-        verbose_name_plural = 'Собственники'
-    def __str__(self):
-        return self.owner
