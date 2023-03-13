@@ -50,7 +50,7 @@ class Flat(models.Model):
         blank=True,
         db_index=True)
     new_building = models.BooleanField('Новостройка', null=True, blank=True, db_index=True)
-    likes = models.ManyToManyField(User, verbose_name='Кто лайкнул', related_name='likes',  blank=True, db_index=True)
+    likes = models.ManyToManyField(User, verbose_name='Кто лайкнул', related_name='likes', blank=True, db_index=True)
 
     class Meta:
         verbose_name = 'Квартира'
@@ -71,19 +71,20 @@ class Complaint(models.Model):
         verbose_name_plural = 'Жалобы'
 
     def __str__(self):
-        return f'Client: {self.user}, flat: {self.flat}, №{self.id}'
+        return f'Client: {self.user}, flat: {self.flat}, №{self.pk}'
 
 
 class Owner(models.Model):
     name = models.CharField('ФИО владельца', max_length=200, db_index=True)
     phonenumber = models.CharField('Номер владельца', max_length=20, null=True, db_index=True)
     pure_phone = PhoneNumberField(verbose_name='Нормализованный номер владельца', null=True, blank=True,
-                                        db_index=True)
+                                  db_index=True)
     flat = models.ManyToManyField(Flat, verbose_name="Квартиры в собственности", related_name='owners', db_index=True,
-                                  blank=True, null=True)
+                                  blank=True)
 
     class Meta:
         verbose_name = 'Собственник'
         verbose_name_plural = 'Собственники'
+
     def __str__(self):
         return self.name
