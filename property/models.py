@@ -48,6 +48,7 @@ class Flat(models.Model):
         blank=True,
         db_index=True)
     new_building = models.BooleanField('Новостройка', null=True, blank=True, db_index=True)
+    likes = models.ManyToManyField(User, verbose_name='Кто лайкнул', blank=True)
 
     class Meta:
         verbose_name = 'Квартира'
