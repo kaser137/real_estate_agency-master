@@ -82,4 +82,4 @@ class Owner(models.Model):
         verbose_name = 'Собственник'
         verbose_name_plural = 'Собственники'
     def __str__(self):
-        return self.owner
+        return self.name
