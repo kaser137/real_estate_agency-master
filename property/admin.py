@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Flat
+from .models import Flat, Complaint
 
 class FlatAdmin(admin.ModelAdmin):
     search_fields = ('town', 'address', 'id', 'owner')
@@ -17,3 +17,4 @@ class ComplaintAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Flat, FlatAdmin)
+admin.site.register(Complaint, ComplaintAdmin)
